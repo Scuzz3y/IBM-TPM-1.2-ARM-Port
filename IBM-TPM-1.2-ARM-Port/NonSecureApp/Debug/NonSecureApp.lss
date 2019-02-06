@@ -1,0 +1,278 @@
+
+NonSecureApp.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002c8  00008000  00008000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .relocate     00000000  20002000  20002000  000082c8  2**0
+                  CONTENTS
+  2 .bss          00000024  20002000  20002000  00012000  2**2
+                  ALLOC
+  3 .heap         00000204  20002024  20002024  00012000  2**0
+                  ALLOC
+  4 .stack        00000400  20002228  20002228  00012000  2**0
+                  ALLOC
+  5 .ARM.attributes 0000002c  00000000  00000000  000082c8  2**0
+                  CONTENTS, READONLY
+  6 .comment      00000059  00000000  00000000  000082f4  2**0
+                  CONTENTS, READONLY
+  7 .debug_info   00000716  00000000  00000000  0000834d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000206  00000000  00000000  00008a63  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000060  00000000  00000000  00008c69  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_aranges 00000048  00000000  00000000  00008cc9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000028  00000000  00000000  00008d11  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_macro  0001377f  00000000  00000000  00008d39  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_line   00000d94  00000000  00000000  0001c4b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_str    0007ddf9  00000000  00000000  0001d24c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_frame  0000008c  00000000  00000000  0009b048  2**2
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00008000 <exception_table>:
+    8000:	28 26 00 20 65 81 00 00 61 81 00 00 61 81 00 00     (&. e...a...a...
+	...
+    802c:	61 81 00 00 00 00 00 00 00 00 00 00 61 81 00 00     a...........a...
+    803c:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    804c:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    805c:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    806c:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    807c:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    808c:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    809c:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    80ac:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    80bc:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    80cc:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    80dc:	61 81 00 00 61 81 00 00 61 81 00 00 61 81 00 00     a...a...a...a...
+    80ec:	61 81 00 00 61 81 00 00                             a...a...
+
+000080f4 <__do_global_dtors_aux>:
+    80f4:	b510      	push	{r4, lr}
+    80f6:	f242 0400 	movw	r4, #8192	; 0x2000
+    80fa:	f2c2 0400 	movt	r4, #8192	; 0x2000
+    80fe:	7823      	ldrb	r3, [r4, #0]
+    8100:	b963      	cbnz	r3, 811c <__do_global_dtors_aux+0x28>
+    8102:	f240 0300 	movw	r3, #0
+    8106:	f2c0 0300 	movt	r3, #0
+    810a:	b12b      	cbz	r3, 8118 <__do_global_dtors_aux+0x24>
+    810c:	f248 20c8 	movw	r0, #33480	; 0x82c8
+    8110:	f2c0 0000 	movt	r0, #0
+    8114:	e000      	b.n	8118 <__do_global_dtors_aux+0x24>
+    8116:	bf00      	nop
+    8118:	2301      	movs	r3, #1
+    811a:	7023      	strb	r3, [r4, #0]
+    811c:	bd10      	pop	{r4, pc}
+    811e:	46c0      	nop			; (mov r8, r8)
+
+00008120 <frame_dummy>:
+    8120:	f240 0300 	movw	r3, #0
+    8124:	f2c0 0300 	movt	r3, #0
+    8128:	b510      	push	{r4, lr}
+    812a:	b14b      	cbz	r3, 8140 <frame_dummy+0x20>
+    812c:	f242 0104 	movw	r1, #8196	; 0x2004
+    8130:	f248 20c8 	movw	r0, #33480	; 0x82c8
+    8134:	f2c2 0100 	movt	r1, #8192	; 0x2000
+    8138:	f2c0 0000 	movt	r0, #0
+    813c:	e000      	b.n	8140 <frame_dummy+0x20>
+    813e:	bf00      	nop
+    8140:	f248 20c8 	movw	r0, #33480	; 0x82c8
+    8144:	f2c0 0000 	movt	r0, #0
+    8148:	6803      	ldr	r3, [r0, #0]
+    814a:	b903      	cbnz	r3, 814e <frame_dummy+0x2e>
+    814c:	bd10      	pop	{r4, pc}
+    814e:	f240 0300 	movw	r3, #0
+    8152:	f2c0 0300 	movt	r3, #0
+    8156:	2b00      	cmp	r3, #0
+    8158:	d0f8      	beq.n	814c <frame_dummy+0x2c>
+    815a:	4798      	blx	r3
+    815c:	e7f6      	b.n	814c <frame_dummy+0x2c>
+    815e:	46c0      	nop			; (mov r8, r8)
+
+00008160 <Dummy_Handler>:
+
+/**
+ * \brief Default interrupt handler for unused IRQs.
+ */
+void Dummy_Handler(void)
+{
+    8160:	e7fe      	b.n	8160 <Dummy_Handler>
+	...
+
+00008164 <Reset_Handler>:
+{
+    8164:	b510      	push	{r4, lr}
+        if (pSrc != pDest) {
+    8166:	f248 22c8 	movw	r2, #33480	; 0x82c8
+    816a:	f2c0 0200 	movt	r2, #0
+    816e:	f242 0300 	movw	r3, #8192	; 0x2000
+    8172:	f2c2 0300 	movt	r3, #8192	; 0x2000
+    8176:	429a      	cmp	r2, r3
+    8178:	d020      	beq.n	81bc <Reset_Handler+0x58>
+                for (; pDest < &_erelocate;) {
+    817a:	001a      	movs	r2, r3
+    817c:	f242 0300 	movw	r3, #8192	; 0x2000
+    8180:	f2c2 0300 	movt	r3, #8192	; 0x2000
+    8184:	429a      	cmp	r2, r3
+    8186:	d219      	bcs.n	81bc <Reset_Handler+0x58>
+    8188:	f242 0300 	movw	r3, #8192	; 0x2000
+    818c:	f2c2 0300 	movt	r3, #8192	; 0x2000
+    8190:	3303      	adds	r3, #3
+    8192:	4a24      	ldr	r2, [pc, #144]	; (8224 <Reset_Handler+0xc0>)
+    8194:	1a9b      	subs	r3, r3, r2
+    8196:	089b      	lsrs	r3, r3, #2
+    8198:	3301      	adds	r3, #1
+    819a:	009b      	lsls	r3, r3, #2
+    819c:	2200      	movs	r2, #0
+                        *pDest++ = *pSrc++;
+    819e:	f242 0100 	movw	r1, #8192	; 0x2000
+    81a2:	f2c2 0100 	movt	r1, #8192	; 0x2000
+    81a6:	1851      	adds	r1, r2, r1
+    81a8:	f248 20c8 	movw	r0, #33480	; 0x82c8
+    81ac:	f2c0 0000 	movt	r0, #0
+    81b0:	1810      	adds	r0, r2, r0
+    81b2:	6800      	ldr	r0, [r0, #0]
+    81b4:	6008      	str	r0, [r1, #0]
+    81b6:	3204      	adds	r2, #4
+                for (; pDest < &_erelocate;) {
+    81b8:	429a      	cmp	r2, r3
+    81ba:	d1f0      	bne.n	819e <Reset_Handler+0x3a>
+        for (pDest = &_szero; pDest < &_ezero;) {
+    81bc:	f242 0200 	movw	r2, #8192	; 0x2000
+    81c0:	f2c2 0200 	movt	r2, #8192	; 0x2000
+    81c4:	f242 0324 	movw	r3, #8228	; 0x2024
+    81c8:	f2c2 0300 	movt	r3, #8192	; 0x2000
+    81cc:	429a      	cmp	r2, r3
+    81ce:	d213      	bcs.n	81f8 <Reset_Handler+0x94>
+    81d0:	f242 0200 	movw	r2, #8192	; 0x2000
+    81d4:	f2c2 0200 	movt	r2, #8192	; 0x2000
+    81d8:	43d3      	mvns	r3, r2
+    81da:	f242 0124 	movw	r1, #8228	; 0x2024
+    81de:	f2c2 0100 	movt	r1, #8192	; 0x2000
+    81e2:	468c      	mov	ip, r1
+    81e4:	4463      	add	r3, ip
+    81e6:	2103      	movs	r1, #3
+    81e8:	438b      	bics	r3, r1
+    81ea:	3304      	adds	r3, #4
+    81ec:	4694      	mov	ip, r2
+    81ee:	4463      	add	r3, ip
+                *pDest++ = 0;
+    81f0:	2100      	movs	r1, #0
+    81f2:	c202      	stmia	r2!, {r1}
+        for (pDest = &_szero; pDest < &_ezero;) {
+    81f4:	4293      	cmp	r3, r2
+    81f6:	d1fc      	bne.n	81f2 <Reset_Handler+0x8e>
+        SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
+    81f8:	f248 0300 	movw	r3, #32768	; 0x8000
+    81fc:	f2c0 0300 	movt	r3, #0
+    8200:	227f      	movs	r2, #127	; 0x7f
+    8202:	4393      	bics	r3, r2
+    8204:	f64e 5200 	movw	r2, #60672	; 0xed00
+    8208:	f2ce 0200 	movt	r2, #57344	; 0xe000
+    820c:	6093      	str	r3, [r2, #8]
+        __libc_init_array();
+    820e:	f248 2359 	movw	r3, #33369	; 0x8259
+    8212:	f2c0 0300 	movt	r3, #0
+    8216:	4798      	blx	r3
+        main();
+    8218:	f248 2329 	movw	r3, #33321	; 0x8229
+    821c:	f2c0 0300 	movt	r3, #0
+    8220:	4798      	blx	r3
+    8222:	e7fe      	b.n	8222 <Reset_Handler+0xbe>
+    8224:	20002004 	.word	0x20002004
+
+00008228 <main>:
+	  * RS = 0x40
+*/
+
+/* Non-secure main() */
+int main(void)
+{
+    8228:	b510      	push	{r4, lr}
+	/* Call non-secure callable function secure_func1 */
+	val1 = secure_func1 (1);
+    822a:	2001      	movs	r0, #1
+    822c:	f647 4309 	movw	r3, #31753	; 0x7c09
+    8230:	f2c0 0300 	movt	r3, #0
+    8234:	4798      	blx	r3
+    8236:	f242 0320 	movw	r3, #8224	; 0x2020
+    823a:	f2c2 0300 	movt	r3, #8192	; 0x2000
+    823e:	6018      	str	r0, [r3, #0]
+	
+	/* Call non-secure callable function secure_func2 */
+	val2 = secure_func2 (7);
+    8240:	2007      	movs	r0, #7
+    8242:	f647 4301 	movw	r3, #31745	; 0x7c01
+    8246:	f2c0 0300 	movt	r3, #0
+    824a:	4798      	blx	r3
+    824c:	f242 031c 	movw	r3, #8220	; 0x201c
+    8250:	f2c2 0300 	movt	r3, #8192	; 0x2000
+    8254:	6018      	str	r0, [r3, #0]
+    8256:	e7fe      	b.n	8256 <main+0x2e>
+
+00008258 <__libc_init_array>:
+    8258:	b570      	push	{r4, r5, r6, lr}
+    825a:	2500      	movs	r5, #0
+    825c:	4b0e      	ldr	r3, [pc, #56]	; (8298 <__libc_init_array+0x40>)
+    825e:	4c0f      	ldr	r4, [pc, #60]	; (829c <__libc_init_array+0x44>)
+    8260:	1ae4      	subs	r4, r4, r3
+    8262:	10a4      	asrs	r4, r4, #2
+    8264:	42a5      	cmp	r5, r4
+    8266:	d109      	bne.n	827c <__libc_init_array+0x24>
+    8268:	2500      	movs	r5, #0
+    826a:	f000 f81d 	bl	82a8 <_init>
+    826e:	4c0c      	ldr	r4, [pc, #48]	; (82a0 <__libc_init_array+0x48>)
+    8270:	4b0c      	ldr	r3, [pc, #48]	; (82a4 <__libc_init_array+0x4c>)
+    8272:	1ae4      	subs	r4, r4, r3
+    8274:	10a4      	asrs	r4, r4, #2
+    8276:	42a5      	cmp	r5, r4
+    8278:	d107      	bne.n	828a <__libc_init_array+0x32>
+    827a:	bd70      	pop	{r4, r5, r6, pc}
+    827c:	4a06      	ldr	r2, [pc, #24]	; (8298 <__libc_init_array+0x40>)
+    827e:	00ab      	lsls	r3, r5, #2
+    8280:	189b      	adds	r3, r3, r2
+    8282:	681b      	ldr	r3, [r3, #0]
+    8284:	4798      	blx	r3
+    8286:	3501      	adds	r5, #1
+    8288:	e7ec      	b.n	8264 <__libc_init_array+0xc>
+    828a:	4a06      	ldr	r2, [pc, #24]	; (82a4 <__libc_init_array+0x4c>)
+    828c:	00ab      	lsls	r3, r5, #2
+    828e:	189b      	adds	r3, r3, r2
+    8290:	681b      	ldr	r3, [r3, #0]
+    8292:	4798      	blx	r3
+    8294:	3501      	adds	r5, #1
+    8296:	e7ee      	b.n	8276 <__libc_init_array+0x1e>
+    8298:	000082b4 	.word	0x000082b4
+    829c:	000082b4 	.word	0x000082b4
+    82a0:	000082b8 	.word	0x000082b8
+    82a4:	000082b4 	.word	0x000082b4
+
+000082a8 <_init>:
+    82a8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    82aa:	46c0      	nop			; (mov r8, r8)
+    82ac:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    82ae:	bc08      	pop	{r3}
+    82b0:	469e      	mov	lr, r3
+    82b2:	4770      	bx	lr
+
+000082b4 <__init_array_start>:
+    82b4:	00008121 	.word	0x00008121
+
+000082b8 <_fini>:
+    82b8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+    82ba:	46c0      	nop			; (mov r8, r8)
+    82bc:	bcf8      	pop	{r3, r4, r5, r6, r7}
+    82be:	bc08      	pop	{r3}
+    82c0:	469e      	mov	lr, r3
+    82c2:	4770      	bx	lr
+
+000082c4 <__fini_array_start>:
+    82c4:	000080f5 	.word	0x000080f5

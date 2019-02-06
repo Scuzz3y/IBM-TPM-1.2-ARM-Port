@@ -1,0 +1,421 @@
+
+SecureApp.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000358  00000000  00000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .gnu.sgstubs  00000020  00007c00  00007c00  00027c00  2**5
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .relocate     00000004  20000000  00000358  00020000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          0000001c  20000004  0000035c  00020004  2**2
+                  ALLOC
+  4 .heap         00000200  20000020  00000378  00020004  2**0
+                  ALLOC
+  5 .stack        00000400  20000220  00000578  00020004  2**0
+                  ALLOC
+  6 .userRowBlock 0000001c  00804000  00804000  00034000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  7 .ARM.attributes 0000002c  00000000  00000000  0003401c  2**0
+                  CONTENTS, READONLY
+  8 .comment      00000059  00000000  00000000  00034048  2**0
+                  CONTENTS, READONLY
+  9 .debug_info   00000972  00000000  00000000  000340a1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_abbrev 000003a9  00000000  00000000  00034a13  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000017a  00000000  00000000  00034dbc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_aranges 000000c0  00000000  00000000  00034f36  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000070  00000000  00000000  00034ff6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_macro  00013b71  00000000  00000000  00035066  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 15 .debug_line   0000152b  00000000  00000000  00048bd7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 16 .debug_str    0007e20f  00000000  00000000  0004a102  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 17 .debug_frame  0000012c  00000000  00000000  000c8314  2**2
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <exception_table>:
+   0:	20 06 00 20 a5 01 00 00 a1 01 00 00 a1 01 00 00      .. ............
+	...
+  2c:	a1 01 00 00 00 00 00 00 00 00 00 00 a1 01 00 00     ................
+  3c:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  4c:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  5c:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  6c:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  7c:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  8c:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  9c:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  ac:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  bc:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  cc:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  dc:	a1 01 00 00 a1 01 00 00 a1 01 00 00 a1 01 00 00     ................
+  ec:	a1 01 00 00 a1 01 00 00                             ........
+
+000000f4 <__acle_se_secure_func1>:
+
+#include "secure.h"    /* Header file with secure interface API */
+
+/* Non-secure callable (entry) function */
+int __attribute__((cmse_nonsecure_entry)) secure_func1(int x)
+{
+  f4:	b510      	push	{r4, lr}
+	return func1(x);
+  f6:	f240 23ad 	movw	r3, #685	; 0x2ad
+  fa:	f2c0 0300 	movt	r3, #0
+  fe:	4798      	blx	r3
+}
+ 100:	0001      	movs	r1, r0
+ 102:	0002      	movs	r2, r0
+ 104:	0003      	movs	r3, r0
+ 106:	4684      	mov	ip, r0
+ 108:	bc10      	pop	{r4}
+ 10a:	bc02      	pop	{r1}
+ 10c:	4686      	mov	lr, r0
+ 10e:	f381 8800 	msr	CPSR_f, r1
+ 112:	470c      	bxns	r1
+
+00000114 <__acle_se_secure_func2>:
+
+/* Non-secure callable (entry) function */
+int __attribute__((cmse_nonsecure_entry)) secure_func2(int x)
+{
+ 114:	b510      	push	{r4, lr}
+	return func2(x);
+ 116:	f240 23b1 	movw	r3, #689	; 0x2b1
+ 11a:	f2c0 0300 	movt	r3, #0
+ 11e:	4798      	blx	r3
+}
+ 120:	0001      	movs	r1, r0
+ 122:	0002      	movs	r2, r0
+ 124:	0003      	movs	r3, r0
+ 126:	4684      	mov	ip, r0
+ 128:	bc10      	pop	{r4}
+ 12a:	bc02      	pop	{r1}
+ 12c:	4686      	mov	lr, r0
+ 12e:	f381 8800 	msr	CPSR_f, r1
+ 132:	470c      	bxns	r1
+
+00000134 <__do_global_dtors_aux>:
+ 134:	b510      	push	{r4, lr}
+ 136:	f240 0404 	movw	r4, #4
+ 13a:	f2c2 0400 	movt	r4, #8192	; 0x2000
+ 13e:	7823      	ldrb	r3, [r4, #0]
+ 140:	b963      	cbnz	r3, 15c <__do_global_dtors_aux+0x28>
+ 142:	f240 0300 	movw	r3, #0
+ 146:	f2c0 0300 	movt	r3, #0
+ 14a:	b12b      	cbz	r3, 158 <__do_global_dtors_aux+0x24>
+ 14c:	f244 001c 	movw	r0, #16412	; 0x401c
+ 150:	f2c0 0080 	movt	r0, #128	; 0x80
+ 154:	e000      	b.n	158 <__do_global_dtors_aux+0x24>
+ 156:	bf00      	nop
+ 158:	2301      	movs	r3, #1
+ 15a:	7023      	strb	r3, [r4, #0]
+ 15c:	bd10      	pop	{r4, pc}
+ 15e:	46c0      	nop			; (mov r8, r8)
+
+00000160 <frame_dummy>:
+ 160:	f240 0300 	movw	r3, #0
+ 164:	f2c0 0300 	movt	r3, #0
+ 168:	b510      	push	{r4, lr}
+ 16a:	b14b      	cbz	r3, 180 <frame_dummy+0x20>
+ 16c:	f240 0108 	movw	r1, #8
+ 170:	f244 001c 	movw	r0, #16412	; 0x401c
+ 174:	f2c2 0100 	movt	r1, #8192	; 0x2000
+ 178:	f2c0 0080 	movt	r0, #128	; 0x80
+ 17c:	e000      	b.n	180 <frame_dummy+0x20>
+ 17e:	bf00      	nop
+ 180:	f244 001c 	movw	r0, #16412	; 0x401c
+ 184:	f2c0 0080 	movt	r0, #128	; 0x80
+ 188:	6803      	ldr	r3, [r0, #0]
+ 18a:	b903      	cbnz	r3, 18e <frame_dummy+0x2e>
+ 18c:	bd10      	pop	{r4, pc}
+ 18e:	f240 0300 	movw	r3, #0
+ 192:	f2c0 0300 	movt	r3, #0
+ 196:	2b00      	cmp	r3, #0
+ 198:	d0f8      	beq.n	18c <frame_dummy+0x2c>
+ 19a:	4798      	blx	r3
+ 19c:	e7f6      	b.n	18c <frame_dummy+0x2c>
+ 19e:	46c0      	nop			; (mov r8, r8)
+
+000001a0 <Dummy_Handler>:
+
+/**
+ * \brief Default interrupt handler for unused IRQs.
+ */
+void Dummy_Handler(void)
+{
+ 1a0:	e7fe      	b.n	1a0 <Dummy_Handler>
+	...
+
+000001a4 <Reset_Handler>:
+{
+ 1a4:	b510      	push	{r4, lr}
+        if (pSrc != pDest) {
+ 1a6:	f240 3258 	movw	r2, #856	; 0x358
+ 1aa:	f2c0 0200 	movt	r2, #0
+ 1ae:	f240 0300 	movw	r3, #0
+ 1b2:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 1b6:	429a      	cmp	r2, r3
+ 1b8:	d020      	beq.n	1fc <Reset_Handler+0x58>
+                for (; pDest < &_erelocate;) {
+ 1ba:	001a      	movs	r2, r3
+ 1bc:	f240 0304 	movw	r3, #4
+ 1c0:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 1c4:	429a      	cmp	r2, r3
+ 1c6:	d219      	bcs.n	1fc <Reset_Handler+0x58>
+ 1c8:	f240 0304 	movw	r3, #4
+ 1cc:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 1d0:	3303      	adds	r3, #3
+ 1d2:	4a24      	ldr	r2, [pc, #144]	; (264 <HEAP_SIZE+0x64>)
+ 1d4:	1a9b      	subs	r3, r3, r2
+ 1d6:	089b      	lsrs	r3, r3, #2
+ 1d8:	3301      	adds	r3, #1
+ 1da:	009b      	lsls	r3, r3, #2
+ 1dc:	2200      	movs	r2, #0
+                        *pDest++ = *pSrc++;
+ 1de:	f240 0100 	movw	r1, #0
+ 1e2:	f2c2 0100 	movt	r1, #8192	; 0x2000
+ 1e6:	1851      	adds	r1, r2, r1
+ 1e8:	f240 3058 	movw	r0, #856	; 0x358
+ 1ec:	f2c0 0000 	movt	r0, #0
+ 1f0:	1810      	adds	r0, r2, r0
+ 1f2:	6800      	ldr	r0, [r0, #0]
+ 1f4:	6008      	str	r0, [r1, #0]
+ 1f6:	3204      	adds	r2, #4
+                for (; pDest < &_erelocate;) {
+ 1f8:	429a      	cmp	r2, r3
+ 1fa:	d1f0      	bne.n	1de <Reset_Handler+0x3a>
+        for (pDest = &_szero; pDest < &_ezero;) {
+ 1fc:	f240 0204 	movw	r2, #4
+ 200:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 204:	f240 0320 	movw	r3, #32
+ 208:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 20c:	429a      	cmp	r2, r3
+ 20e:	d213      	bcs.n	238 <HEAP_SIZE+0x38>
+ 210:	f240 0204 	movw	r2, #4
+ 214:	f2c2 0200 	movt	r2, #8192	; 0x2000
+ 218:	43d3      	mvns	r3, r2
+ 21a:	f240 0120 	movw	r1, #32
+ 21e:	f2c2 0100 	movt	r1, #8192	; 0x2000
+ 222:	468c      	mov	ip, r1
+ 224:	4463      	add	r3, ip
+ 226:	2103      	movs	r1, #3
+ 228:	438b      	bics	r3, r1
+ 22a:	3304      	adds	r3, #4
+ 22c:	4694      	mov	ip, r2
+ 22e:	4463      	add	r3, ip
+                *pDest++ = 0;
+ 230:	2100      	movs	r1, #0
+ 232:	c202      	stmia	r2!, {r1}
+        for (pDest = &_szero; pDest < &_ezero;) {
+ 234:	4293      	cmp	r3, r2
+ 236:	d1fc      	bne.n	232 <HEAP_SIZE+0x32>
+        SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
+ 238:	f240 0300 	movw	r3, #0
+ 23c:	f2c0 0300 	movt	r3, #0
+ 240:	227f      	movs	r2, #127	; 0x7f
+ 242:	4393      	bics	r3, r2
+ 244:	f64e 5200 	movw	r2, #60672	; 0xed00
+ 248:	f2ce 0200 	movt	r2, #57344	; 0xe000
+ 24c:	6093      	str	r3, [r2, #8]
+        __libc_init_array();
+ 24e:	f240 23e9 	movw	r3, #745	; 0x2e9
+ 252:	f2c0 0300 	movt	r3, #0
+ 256:	4798      	blx	r3
+        main();
+ 258:	f240 237d 	movw	r3, #637	; 0x27d
+ 25c:	f2c0 0300 	movt	r3, #0
+ 260:	4798      	blx	r3
+ 262:	e7fe      	b.n	262 <HEAP_SIZE+0x62>
+ 264:	20000004 	.word	0x20000004
+
+00000268 <SystemInit>:
+ *         Initialize the System and update the SystemCoreClock variable.
+ */
+void SystemInit(void)
+{
+    // Keep the default device state after reset
+    SystemCoreClock = __SYSTEM_CLOCK;
+ 268:	f240 0300 	movw	r3, #0
+ 26c:	f2c2 0300 	movt	r3, #8192	; 0x2000
+ 270:	f640 1200 	movw	r2, #2304	; 0x900
+ 274:	f2c0 023d 	movt	r2, #61	; 0x3d
+ 278:	601a      	str	r2, [r3, #0]
+    return;
+}
+ 27a:	4770      	bx	lr
+
+0000027c <main>:
+	* Jumps to the non-secure software application
+*/
+
+/* Secure main() */
+int main(void)
+{
+ 27c:	b510      	push	{r4, lr}
+	funcptr_void NonSecure_ResetHandler;
+  	
+	/* Initialize the SAM system */
+    SystemInit();
+ 27e:	f240 2369 	movw	r3, #617	; 0x269
+ 282:	f2c0 0300 	movt	r3, #0
+ 286:	4798      	blx	r3
+
+	/* Set non-secure main stack (MSP_NS) */
+	__TZ_set_MSP_NS(*((uint32_t *)(TZ_START_NS)));
+ 288:	f248 0300 	movw	r3, #32768	; 0x8000
+  \details Assigns the given value to the non-secure Main Stack Pointer (MSP) when in secure state.
+  \param [in]    topOfMainStack  Main Stack Pointer value to set
+ */
+__attribute__((always_inline)) __STATIC_INLINE void __TZ_set_MSP_NS(uint32_t topOfMainStack)
+{
+  __ASM volatile ("MSR msp_ns, %0" : : "r" (topOfMainStack) : );
+ 28c:	681b      	ldr	r3, [r3, #0]
+ 28e:	f383 8888 	msr	MSP_NS, r3
+  
+	/* Get non-secure reset handler */
+	NonSecure_ResetHandler = (funcptr_void)(*((uint32_t *)((TZ_START_NS) + 4U)));
+ 292:	f248 0304 	movw	r3, #32772	; 0x8004
+  
+	/* Start non-secure state software application */
+	NonSecure_ResetHandler();
+ 296:	681c      	ldr	r4, [r3, #0]
+ 298:	0864      	lsrs	r4, r4, #1
+ 29a:	0064      	lsls	r4, r4, #1
+ 29c:	0020      	movs	r0, r4
+ 29e:	0021      	movs	r1, r4
+ 2a0:	0022      	movs	r2, r4
+ 2a2:	0023      	movs	r3, r4
+ 2a4:	f000 f806 	bl	2b4 <__gnu_cmse_nonsecure_call>
+  
+    /* Replace with your SECURE application code */
+    while (1) 
+    {
+		__NOP();
+ 2a8:	46c0      	nop			; (mov r8, r8)
+ 2aa:	e7fd      	b.n	2a8 <main+0x2c>
+
+000002ac <func1>:
+
+#include "secure.h"    /* Header file with secure interface API */
+
+int func1(int x)
+{
+	return x + 3;
+ 2ac:	3003      	adds	r0, #3
+}
+ 2ae:	4770      	bx	lr
+
+000002b0 <func2>:
+
+int func2(int x)
+{
+	return x - 2;
+ 2b0:	3802      	subs	r0, #2
+}
+ 2b2:	4770      	bx	lr
+
+000002b4 <__gnu_cmse_nonsecure_call>:
+ 2b4:	b5e0      	push	{r5, r6, r7, lr}
+ 2b6:	4645      	mov	r5, r8
+ 2b8:	464e      	mov	r6, r9
+ 2ba:	4657      	mov	r7, sl
+ 2bc:	b4e0      	push	{r5, r6, r7}
+ 2be:	465d      	mov	r5, fp
+ 2c0:	b420      	push	{r5}
+ 2c2:	4625      	mov	r5, r4
+ 2c4:	4626      	mov	r6, r4
+ 2c6:	4627      	mov	r7, r4
+ 2c8:	46a0      	mov	r8, r4
+ 2ca:	46a1      	mov	r9, r4
+ 2cc:	46a2      	mov	sl, r4
+ 2ce:	46a3      	mov	fp, r4
+ 2d0:	46a4      	mov	ip, r4
+ 2d2:	f384 8800 	msr	CPSR_f, r4
+ 2d6:	47a4      	blxns	r4
+ 2d8:	bc20      	pop	{r5}
+ 2da:	46ab      	mov	fp, r5
+ 2dc:	bce0      	pop	{r5, r6, r7}
+ 2de:	46ba      	mov	sl, r7
+ 2e0:	46b1      	mov	r9, r6
+ 2e2:	46a8      	mov	r8, r5
+ 2e4:	bde0      	pop	{r5, r6, r7, pc}
+	...
+
+000002e8 <__libc_init_array>:
+ 2e8:	b570      	push	{r4, r5, r6, lr}
+ 2ea:	2500      	movs	r5, #0
+ 2ec:	4b0e      	ldr	r3, [pc, #56]	; (328 <__libc_init_array+0x40>)
+ 2ee:	4c0f      	ldr	r4, [pc, #60]	; (32c <__libc_init_array+0x44>)
+ 2f0:	1ae4      	subs	r4, r4, r3
+ 2f2:	10a4      	asrs	r4, r4, #2
+ 2f4:	42a5      	cmp	r5, r4
+ 2f6:	d109      	bne.n	30c <__libc_init_array+0x24>
+ 2f8:	2500      	movs	r5, #0
+ 2fa:	f000 f81d 	bl	338 <_init>
+ 2fe:	4c0c      	ldr	r4, [pc, #48]	; (330 <__libc_init_array+0x48>)
+ 300:	4b0c      	ldr	r3, [pc, #48]	; (334 <__libc_init_array+0x4c>)
+ 302:	1ae4      	subs	r4, r4, r3
+ 304:	10a4      	asrs	r4, r4, #2
+ 306:	42a5      	cmp	r5, r4
+ 308:	d107      	bne.n	31a <__libc_init_array+0x32>
+ 30a:	bd70      	pop	{r4, r5, r6, pc}
+ 30c:	4a06      	ldr	r2, [pc, #24]	; (328 <__libc_init_array+0x40>)
+ 30e:	00ab      	lsls	r3, r5, #2
+ 310:	189b      	adds	r3, r3, r2
+ 312:	681b      	ldr	r3, [r3, #0]
+ 314:	4798      	blx	r3
+ 316:	3501      	adds	r5, #1
+ 318:	e7ec      	b.n	2f4 <__libc_init_array+0xc>
+ 31a:	4a06      	ldr	r2, [pc, #24]	; (334 <__libc_init_array+0x4c>)
+ 31c:	00ab      	lsls	r3, r5, #2
+ 31e:	189b      	adds	r3, r3, r2
+ 320:	681b      	ldr	r3, [r3, #0]
+ 322:	4798      	blx	r3
+ 324:	3501      	adds	r5, #1
+ 326:	e7ee      	b.n	306 <__libc_init_array+0x1e>
+ 328:	00000344 	.word	0x00000344
+ 32c:	00000344 	.word	0x00000344
+ 330:	00000348 	.word	0x00000348
+ 334:	00000344 	.word	0x00000344
+
+00000338 <_init>:
+ 338:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 33a:	46c0      	nop			; (mov r8, r8)
+ 33c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 33e:	bc08      	pop	{r3}
+ 340:	469e      	mov	lr, r3
+ 342:	4770      	bx	lr
+
+00000344 <__init_array_start>:
+ 344:	00000161 	.word	0x00000161
+
+00000348 <_fini>:
+ 348:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 34a:	46c0      	nop			; (mov r8, r8)
+ 34c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 34e:	bc08      	pop	{r3}
+ 350:	469e      	mov	lr, r3
+ 352:	4770      	bx	lr
+
+00000354 <__fini_array_start>:
+ 354:	00000135 	.word	0x00000135
+
+Disassembly of section .gnu.sgstubs:
+
+00007c00 <secure_func2>:
+    7c00:	e97f e97f 	sg
+    7c04:	f7f8 ba86 	b.w	114 <__acle_se_secure_func2>
+
+00007c08 <secure_func1>:
+    7c08:	e97f e97f 	sg
+    7c0c:	f7f8 ba72 	b.w	f4 <__acle_se_secure_func1>
+	...
